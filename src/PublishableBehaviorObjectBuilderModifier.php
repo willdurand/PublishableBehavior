@@ -23,6 +23,8 @@ class PublishableBehaviorObjectBuilderModifier
     public function objectAttributes($builder)
     {
         return "private \$forcePublish = false;
+
+private \$forceUnpublish = false;
 ";
     }
 

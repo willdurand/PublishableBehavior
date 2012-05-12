@@ -6,5 +6,7 @@
  */
 public function filterUnpublished()
 {
+    $this->includeUnpublished = true;
+
     return $this-><?php echo $isPublishedColumnFilter ?>(false);
 }

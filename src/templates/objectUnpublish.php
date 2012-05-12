@@ -9,6 +9,7 @@ public function unpublish(PropelPDO $con = null)
 {
     if (true === $this->isPublished()) {
         $this-><?php echo $isPublishedColumnSetter ?>(false);
+        $this->forceUnpublish = true;
     }
 
     return $this->save($con);

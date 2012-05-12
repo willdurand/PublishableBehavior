@@ -1,5 +1,7 @@
 <?php if ($isPublishedByDefault) : ?>
-$this-><?php echo $isPublishedColumnSetter ?>(true);
+if (false === $this->forceUnpublish) {
+    $this-><?php echo $isPublishedColumnSetter ?>(true);
+}
 <?php else: ?>
 if (false === $this->forcePublish) {
     $this-><?php echo $isPublishedColumnSetter ?>(false);

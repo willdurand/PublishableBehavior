@@ -62,7 +62,7 @@ class PublishableBehaviorQueryBuilderModifier
     {
         return $this->behavior->renderTemplate('queryPublish', array(
             'queryClassName'            => $this->getQueryClassName($builder),
-            'isPublishedColumnName'     => $this->behavior->getParameter('is_published_column'),
+            'isPublishedColumnName'     => $this->behavior->getColumnForParameter('is_published_column')->getPhpName(),
         ));
     }
 
@@ -70,7 +70,7 @@ class PublishableBehaviorQueryBuilderModifier
     {
         return $this->behavior->renderTemplate('queryUnpublish', array(
             'queryClassName'            => $this->getQueryClassName($builder),
-            'isPublishedColumnName'     => $this->behavior->getParameter('is_published_column'),
+            'isPublishedColumnName'     => $this->behavior->getColumnForParameter('is_published_column')->getPhpName(),
         ));
     }
 
