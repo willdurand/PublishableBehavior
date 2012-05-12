@@ -81,7 +81,6 @@ Parameters
 Todo
 ----
 
-* More unit tests
 * Add time frames support (object published from `9999-99-99` to `9999-99-99`)
 
 
