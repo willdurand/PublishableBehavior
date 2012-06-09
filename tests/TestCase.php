@@ -38,7 +38,7 @@ class TestCase extends \PHPUnit_Framework_TestCase
 EOF
             , array(
               '%tablename%' => $tablename,
-              '%suffix%'    => count($this->registered_schemas),
+              '%suffix%'    => get_class($this) . count($this->registered_schemas),
               '%options%'   => join('\n', $optionString)
             ));
             $builder = new PropelQuickBuilder();
