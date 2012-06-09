@@ -10,6 +10,11 @@
     syntaxCheck="false"
     bootstrap="tests/bootstrap.php"
     >
+    <php>
+        <server name="PHING_DIR" value="./../../phing/phing" />
+        <server name="PROPEL_DIR" value="./../../propel/propel-1" />
+        <server name="AUTOLOADER" value="./../../autoload.php" />
+    </php>
     <testsuites>
         <testsuite name="PublishableBehavior Test Suite">
             <directory>./tests/</directory>

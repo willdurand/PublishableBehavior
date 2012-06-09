@@ -77,6 +77,22 @@ Parameters
 </behavior>
 ```
 
+Running tests
+-------------
+
+First of all, copy the `phpunit.xml.dist` to `phpunit.xml`.
+
+If you did not install propel with composer, change `PROPEL_DIR` and `PHING_DIR`
+values to customize the include path.
+Customize autoloader by changing `AUTOLOAD` property.
+
+then simply launch
+
+``` bash
+$ phpunit -c phpunit.xml
+```
+
+All green ?
 
 Todo
 ----
