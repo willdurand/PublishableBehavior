@@ -6,5 +6,9 @@
  */
 public function filterPublished()
 {
-    return $this-><?php echo $isPublishedColumnFilter ?>(true);
+    return $this
+<?php if ($with_timeframe): ?>
+        ->filterByPublicationActive()
+<?php endif ?>
+        -><?php echo $isPublishedColumnFilter ?>(true);
 }

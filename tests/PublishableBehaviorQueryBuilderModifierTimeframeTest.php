@@ -47,7 +47,10 @@ class PublishableBehaviorQueryBuilderModifierTimeframeTest extends TestCase
             array('-1 week', '-1 day', 0),
             array('+1 day', '+1 week', 0),
         );
-        $classes = array('PublishableTimeframe', 'PublishableRequired', 'PublishableRequireStart', 'PublishableRequireEnd');
+
+        // same dataset for every classes
+        $classes = array( 'PublishableTimeframe', 'PublishableRequired',
+                          'PublishableRequireStart', 'PublishableRequireEnd');
 
         $return = array();
         foreach ($classes as $class) {
@@ -71,6 +74,30 @@ class PublishableBehaviorQueryBuilderModifierTimeframeTest extends TestCase
             ->filterByPublicationActive();
 
         $this->assertEquals($expected, $query->count());
+    }
+
+    /**
+     * @dataProvider simplePublishTimeframeDataProvider
+     */
+    public function testPublishedWithTimeFrame($class, $start, $end, $expected)
+    {
+        $this->createObjects($class, array(array($start, $end)), true);
+        $queryName = $class.'Query';
+        $query = $queryName::create();
+
+        $this->assertEquals($expected, $query->count());
+    }
+
+    /**
+     * @dataProvider simplePublishTimeframeDataProvider
+     */
+    public function testUnPublishedWithTimeFrame($class, $start, $end, $expected)
+    {
+        $this->createObjects($class, array(array($start, $end)), false);
+        $queryName = $class.'Query';
+        $query = $queryName::create();
+
+        $this->assertEquals(0, $query->count());
     }
 
     public function isPublishedTimeframeDataProvider()
