@@ -48,4 +48,30 @@ class PublishableBehaviorTest extends TestCase
         $this->assertTrue(method_exists('TimeframeObjectDifferentName', 'getPublishedAt1'));
         $this->assertTrue(method_exists('TimeframeObjectDifferentName', 'getPublishedUntil1'));
     }
+
+    public function testSqlTimeframeRequired()
+    {
+        $options = array(
+            'with_timeframe' => 'true',
+            'require_start'   => 'true',
+            'require_end'     => 'true',
+        );
+        $expected = <<<EOF
+	published_at TIMESTAMP NOT NULL,
+	published_until TIMESTAMP NOT NULL
+EOF;
+        $this->assertSQLContains('publishable_object', $options, $expected);
+    }
+
+    public function testSqlTimeframe()
+    {
+        $options = array(
+            'with_timeframe' => 'true',
+        );
+        $expected = <<<EOF
+	published_at TIMESTAMP,
+	published_until TIMESTAMP
+EOF;
+        $this->assertSQLContains('publishable_object', $options, $expected);
+    }
 }

@@ -53,11 +53,12 @@ class PublishableBehavior extends Behavior
 
     protected function ensureColumn($name, $configuration = array())
     {
-      if (!$this->getTable()->containsColumn($name)) {
-          $this->getTable()->addColumn(array_merge($configuration, array(
-              'name'          => $name,
-          )));
-      }
+        if (!$this->getTable()->containsColumn($name)) {
+            $required = false;
+            $this->getTable()->addColumn(array_merge($configuration, array(
+                'name'          => $name,
+            )));
+        }
     }
 
     /**
