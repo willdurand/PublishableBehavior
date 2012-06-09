@@ -14,8 +14,8 @@ class TestCase extends \PHPUnit_Framework_TestCase
     {
         $generator = new PhpNameGenerator();
         $classname = $generator->generateName(array($tablename, PhpNameGenerator::CONV_METHOD_CLEAN));
-        $this->registered_schemas[$classname] = $options;
         $this->buildSchemaObject($tablename, $classname, $options);
+        $this->registered_schemas[$classname] = $options;
     }
 
     protected function buildSchemaObject($tablename, $classname, $options)
@@ -26,6 +26,9 @@ class TestCase extends \PHPUnit_Framework_TestCase
             $builder = $this->getBuilder($schema);
 
             $builder->build();
+        }
+        else if (!isset($this->registered_schemas[$classname])){
+            //error_log('WARNING: you already used this alias '.$tablename.', I will use the old version');
         }
     }
 
