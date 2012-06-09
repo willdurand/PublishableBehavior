@@ -43,6 +43,13 @@ Mark an object as not published:
 
     unpublish(PropelPDO $con = null)
 
+Has publication frame started ?
+
+    hasPublicationEnded()
+
+Has publication frame started ?
+
+    hasPublicationStarted()
 
 ### ActiveQuery API ###
 
@@ -58,6 +65,10 @@ Filter by objects published exclusively:
 
     filterPublished()
 
+Filter by publication active
+
+    filterByPublicationActive($date = 'now')
+
 Mark an object as published:
 
     publish(PropelPDO $con = null)
@@ -65,7 +76,6 @@ Mark an object as published:
 Mark an object as not published:
 
     unpublish(PropelPDO $con = null)
-
 
 Parameters
 ----------
