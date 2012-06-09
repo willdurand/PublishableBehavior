@@ -11,7 +11,12 @@ class PublishableBehaviorQueryBuilderModifierTest extends TestCase
 
     public function setUp()
     {
-        parent::setUp();
+        $this->addPublishableObject('publishable_object', array());
+        $this->addPublishableObject('published_object', array(
+            'published_by_default' => 'true'
+        ));
+
+        $this->deleteAll();
 
         for ($i = 0; $i < 10; $i++) {
             $obj = new PublishableObject();
