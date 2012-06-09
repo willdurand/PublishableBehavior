@@ -5,26 +5,42 @@
  */
 class TestCase extends \PHPUnit_Framework_TestCase
 {
-    public function setUp()
+    protected $registered_schemas = array();
+
+    /**
+     * add a new publishable schema
+     */
+    public function addPublishableObject($tablename, $options = array())
     {
-        if (!class_exists('PublishableObject')) {
-            $schema = <<<EOF
-<database name="bookstore" defaultIdMethod="native">
-    <table name="publishable_object">
-        <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
+        $generator = new PhpNameGenerator();
+        $classname = $generator->generateName(array($tablename, PhpNameGenerator::CONV_METHOD_CLEAN));
+        $this->registered_schemas[$classname] = $options;
+        $this->buildSchemaObject($tablename, $classname, $options);
+    }
 
-        <behavior name="publishable" />
-    </table>
-
-    <table name="published_object">
+    protected function buildSchemaObject($tablename, $classname, $options)
+    {
+        if (!class_exists($classname)) {
+            $optionString = array();
+            foreach ($options as $name => $value) {
+                $optionString[] = sprintf('<parameter name="%s" value="%s" />', $name, $value);
+            }
+            $schema = strtr(<<<EOF
+<database name="bookstore%suffix%" defaultIdMethod="native">
+    <table name="%tablename%">
         <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
 
         <behavior name="publishable">
-            <parameter name="published_by_default" value="true" />
+          %options%
         </behavior>
     </table>
 </database>
-EOF;
+EOF
+            , array(
+              '%tablename%' => $tablename,
+              '%suffix%'    => count($this->registered_schemas),
+              '%options%'   => join('\n', $optionString)
+            ));
             $builder = new PropelQuickBuilder();
             $config  = $builder->getConfig();
             $config->setBuildProperty('behavior.publishable.class', '../src/PublishableBehavior');
@@ -33,8 +49,18 @@ EOF;
 
             $builder->build();
         }
+    }
 
-        PublishableObjectQuery::create()->deleteAll();
-        PublishedObjectQuery::create()->deleteAll();
+    public function deleteAll($objectClass = null)
+    {
+        if (empty($objectClass)) {
+            foreach($this->registered_schemas as $name => $options) {
+                $this->deleteAll($name);
+            }
+            return ;
+        }
+
+        $queryClass = sprintf('%sQuery', $objectClass);
+        $queryClass::create()->deleteAll();
     }
 }
