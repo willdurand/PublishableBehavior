@@ -1,6 +1,8 @@
 PublishableBehavior
 ===================
 
+[![Build Status](https://secure.travis-ci.org/willdurand/PublishableBehavior.png?branch=master)](http://travis-ci.org/willdurand/PublishableBehavior)
+
 The PublishableBehavior is designed to quickly add publish/unpublish features to your model.
 
 
