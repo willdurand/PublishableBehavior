@@ -84,7 +84,7 @@ Parameters
 <behavior name="publishable">
     <parameter name="is_published_column" value="is_published" />
     <parameter name="published_by_default" value="false" />
-    <-- timeframe support -->
+    <!-- timeframe support -->
     <parameter name="with_timeframe" value="false" />
     <parameter name="published_at_column" value="published_at" />
     <parameter name="published_until_column" value="published_until" />
@@ -109,10 +109,11 @@ then simply launch
 $ phpunit -c phpunit.xml
 ```
 
-All green ?
+All green?
 
 
 Credits
 -------
 
-William Durand <william.durand1@gmail.com>
+* William Durand <william.durand1@gmail.com>
+* Julien Muetton <julien_muetton@carpe-hora.com>
