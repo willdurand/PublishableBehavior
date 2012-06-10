@@ -8,9 +8,10 @@
 public function isPublished()
 {
 <?php if ($with_timeframe): ?>
-  if  (!$this->hasPublicationStarted()  ||  $this->hasPublicationEnded())  {
+  if (!$this->hasPublicationStarted()  ||  $this->hasPublicationEnded()) {
       return  false;
   }
 <?php endif ?>
+
     return null !== $this-><?php echo $isPublishedColumnGetter ?>() && $this-><?php echo $isPublishedColumnGetter ?>();
 }

@@ -7,6 +7,7 @@
 public function filterByPublicationActive($date = 'now')
 {
     $date = new PropelDateTime($date);
+
     return $this
 <?php if (!$require_start): ?>
         ->condition('published_at_null', $this->getModelAliasOrName().'.<?php echo $publishedAtColumnPhpName ?> IS NULL')

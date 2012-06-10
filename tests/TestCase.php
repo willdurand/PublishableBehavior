@@ -26,8 +26,7 @@ class TestCase extends \PHPUnit_Framework_TestCase
             $builder = $this->getBuilder($schema);
 
             $builder->build();
-        }
-        else if (!isset($this->registered_schemas[$classname])){
+        } elseif (!isset($this->registered_schemas[$classname])) {
             //error_log('WARNING: you already used this alias '.$tablename.', I will use the old version');
         }
     }
@@ -48,6 +47,7 @@ class TestCase extends \PHPUnit_Framework_TestCase
         $config->setBuildProperty('behavior.publishable.class', '../src/PublishableBehavior');
         $builder->setConfig($config);
         $builder->setSchema($schema);
+
         return $builder;
     }
 
@@ -81,9 +81,10 @@ EOF
     public function deleteAll($objectClass = null)
     {
         if (empty($objectClass)) {
-            foreach($this->registered_schemas as $name => $options) {
+            foreach ($this->registered_schemas as $name => $options) {
                 $this->deleteAll($name);
             }
+
             return ;
         }
 

@@ -68,9 +68,10 @@ private \$forcePublish = false;
 
     public function addHasPublicationStarted($builder)
     {
-        if  ('true'  !==  $this->behavior->getParameter('with_timeframe'))  {
+        if ('true'  !==  $this->behavior->getParameter('with_timeframe')) {
             return  '';
         }
+
         return $out = $this->behavior->renderTemplate('objectHasPublicationStarted', array(
             'modelName'                 => $this->getModelName($builder),
             'objectClassName'           => $this->getObjectClassName($builder),
@@ -81,9 +82,10 @@ private \$forcePublish = false;
 
     public function addHasPublicationEnded($builder)
     {
-        if  ('true'  !==  $this->behavior->getParameter('with_timeframe'))  {
+        if ('true'  !==  $this->behavior->getParameter('with_timeframe')) {
             return  '';
         }
+
         return $this->behavior->renderTemplate('objectHasPublicationEnded', array(
             'modelName'                 => $this->getModelName($builder),
             'objectClassName'           => $this->getObjectClassName($builder),

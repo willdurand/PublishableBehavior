@@ -7,8 +7,5 @@ php:
 before_script:
   - curl -s http://getcomposer.org/installer | php
   - php composer.phar --dev install
-  - cp phpunit.xml.dist phpunit.xml
 
-script:
-  - phpunit -c phpunit.xml
-  - phpunit --coverage-text
+script: phpunit --coverage-text

@@ -41,7 +41,7 @@ class PublishableBehaviorQueryBuilderModifier
         return $this->behavior->renderTemplate('queryFilterPublished', array(
             'isPublishedColumnFilter'   => $this->getColumnFilter('is_published_column'),
             'queryClassName'            => $this->getQueryClassName($builder),
-			'with_timeframe'			=> 'true' === $this->behavior->getParameter('with_timeframe'),
+            'with_timeframe'			=> 'true' === $this->behavior->getParameter('with_timeframe'),
         ));
     }
 
@@ -55,17 +55,18 @@ class PublishableBehaviorQueryBuilderModifier
 
     public function addFilterByPublicationActive($builder)
     {
-		if ('true' !== $this->behavior->getParameter('with_timeframe')) {
-			return '';
-		}
+        if ('true' !== $this->behavior->getParameter('with_timeframe')) {
+            return '';
+        }
+
         return $this->behavior->renderTemplate('queryFilterByPublicationActive', array(
             'queryClassName'            => $this->getQueryClassName($builder),
             'publishedAtColumnFilter'   => $this->getColumnFilter('published_at_column'),
             'publishedAtColumnPhpName'   => $this->getColumnPhpName('published_at_column'),
             'publishedUntilColumnFilter'=> $this->getColumnFilter('published_until_column'),
             'publishedUntilColumnPhpName'=> $this->getColumnPhpName('published_until_column'),
-			'require_start'     		=> 'true' === $this->behavior->getParameter('require_start'),
-			'require_end'       		=> 'true' === $this->behavior->getParameter('require_end'),
+            'require_start'     		=> 'true' === $this->behavior->getParameter('require_start'),
+            'require_end'       		=> 'true' === $this->behavior->getParameter('require_end'),
         ));
     }
 

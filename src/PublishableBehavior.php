@@ -36,15 +36,15 @@ class PublishableBehavior extends Behavior
     {
         // add the 'is_published' column
         $this->ensureColumn($this->getParameter('is_published_column'), array(
-              'type'          => 'BOOLEAN',
-              'defaultValue'  => $this->getParameter('published_by_default'),
-          ));
+            'type'          => 'BOOLEAN',
+            'defaultValue'  => $this->getParameter('published_by_default'),
+        ));
         if ('true' === $this->getParameter('with_timeframe')) {
-          $this->ensureColumn($this->getParameter('published_at_column'), array(
+            $this->ensureColumn($this->getParameter('published_at_column'), array(
                 'type'          => 'TIMESTAMP',
                 'required'      => $this->getParameter('require_start')
             ));
-          $this->ensureColumn($this->getParameter('published_until_column'), array(
+            $this->ensureColumn($this->getParameter('published_until_column'), array(
                 'type'          => 'TIMESTAMP',
                 'required'      => $this->getParameter('require_end')
             ));
