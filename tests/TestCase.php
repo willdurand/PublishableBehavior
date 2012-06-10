@@ -5,36 +5,89 @@
  */
 class TestCase extends \PHPUnit_Framework_TestCase
 {
-    public function setUp()
+    protected $registered_schemas = array();
+
+    /**
+     * add a new publishable schema
+     */
+    public function addPublishableObject($tablename, $options = array())
     {
-        if (!class_exists('PublishableObject')) {
-            $schema = <<<EOF
-<database name="bookstore" defaultIdMethod="native">
-    <table name="publishable_object">
-        <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
+        $generator = new PhpNameGenerator();
+        $classname = $generator->generateName(array($tablename, PhpNameGenerator::CONV_METHOD_CLEAN));
+        $this->buildSchemaObject($tablename, $classname, $options);
+        $this->registered_schemas[$classname] = $options;
+    }
 
-        <behavior name="publishable" />
-    </table>
+    protected function buildSchemaObject($tablename, $classname, $options)
+    {
+        if (!class_exists($classname)) {
+            $schema = $this->generateSchema($tablename, $options);
 
-    <table name="published_object">
-        <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-
-        <behavior name="publishable">
-            <parameter name="published_by_default" value="true" />
-        </behavior>
-    </table>
-</database>
-EOF;
-            $builder = new PropelQuickBuilder();
-            $config  = $builder->getConfig();
-            $config->setBuildProperty('behavior.publishable.class', '../src/PublishableBehavior');
-            $builder->setConfig($config);
-            $builder->setSchema($schema);
+            $builder = $this->getBuilder($schema);
 
             $builder->build();
         }
+        else if (!isset($this->registered_schemas[$classname])){
+            //error_log('WARNING: you already used this alias '.$tablename.', I will use the old version');
+        }
+    }
 
-        PublishableObjectQuery::create()->deleteAll();
-        PublishedObjectQuery::create()->deleteAll();
+    public function assertSQLContains($tablename, $options, $expected)
+    {
+        $schema = $this->generateSchema($tablename, $options);
+
+        $builder = $this->getBuilder($schema);
+
+        $this->assertContains($expected, $builder->getSQL());
+    }
+
+    protected function getBuilder($schema)
+    {
+        $builder = new PropelQuickBuilder();
+        $config  = $builder->getConfig();
+        $config->setBuildProperty('behavior.publishable.class', '../src/PublishableBehavior');
+        $builder->setConfig($config);
+        $builder->setSchema($schema);
+        return $builder;
+    }
+
+    protected function generateSchema($tablename, $options)
+    {
+         $optionString = array();
+         foreach ($options as $name => $value) {
+             $optionString[] = sprintf('<parameter name="%s" value="%s" />', $name, $value);
+         }
+
+         $schema = strtr(<<<EOF
+<database name="bookstore%suffix%" defaultIdMethod="native">
+    <table name="%tablename%">
+        <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
+
+        <behavior name="publishable">
+          %options%
+        </behavior>
+    </table>
+</database>
+EOF
+        , array(
+          '%tablename%' => $tablename,
+          '%suffix%'    => get_class($this) . count($this->registered_schemas),
+          '%options%'   => join('\n', $optionString)
+        ));
+
+        return $schema;
+    }
+
+    public function deleteAll($objectClass = null)
+    {
+        if (empty($objectClass)) {
+            foreach($this->registered_schemas as $name => $options) {
+                $this->deleteAll($name);
+            }
+            return ;
+        }
+
+        $queryClass = sprintf('%sQuery', $objectClass);
+        $queryClass::create()->deleteAll();
     }
 }

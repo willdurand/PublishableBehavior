@@ -43,6 +43,13 @@ Mark an object as not published:
 
     unpublish(PropelPDO $con = null)
 
+Has publication frame started ?
+
+    hasPublicationEnded()
+
+Has publication frame started ?
+
+    hasPublicationStarted()
 
 ### ActiveQuery API ###
 
@@ -58,6 +65,10 @@ Filter by objects published exclusively:
 
     filterPublished()
 
+Filter by publication active
+
+    filterByPublicationActive($date = 'now')
+
 Mark an object as published:
 
     publish(PropelPDO $con = null)
@@ -66,7 +77,6 @@ Mark an object as not published:
 
     unpublish(PropelPDO $con = null)
 
-
 Parameters
 ----------
 
@@ -74,14 +84,32 @@ Parameters
 <behavior name="publishable">
     <parameter name="is_published_column" value="is_published" />
     <parameter name="published_by_default" value="false" />
+    <-- timeframe support -->
+    <parameter name="with_timeframe" value="false" />
+    <parameter name="published_at_column" value="published_at" />
+    <parameter name="published_until_column" value="published_until" />
+    <!-- start and end value can be null -->
+    <parameter name="require_start" value="false" />
+    <parameter name="require_end" value="false" />
 </behavior>
 ```
 
+Running tests
+-------------
 
-Todo
-----
+First of all, copy the `phpunit.xml.dist` to `phpunit.xml`.
 
-* Add time frames support (object published from `9999-99-99` to `9999-99-99`)
+If you did not install propel with composer, change `PROPEL_DIR` and `PHING_DIR`
+values to customize the include path.
+Customize autoloader by changing `AUTOLOAD` property.
+
+then simply launch
+
+``` bash
+$ phpunit -c phpunit.xml
+```
+
+All green ?
 
 
 Credits

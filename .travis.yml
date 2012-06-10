@@ -5,7 +5,10 @@ php:
   - 5.4
 
 before_script:
-    - curl -s http://getcomposer.org/installer | php
-    - php composer.phar --dev install
+  - curl -s http://getcomposer.org/installer | php
+  - php composer.phar --dev install
+  - cp phpunit.xml.dist phpunit.xml
 
-script: phpunit --coverage-text
+script:
+  - phpunit -c phpunit.xml
+  - phpunit --coverage-text

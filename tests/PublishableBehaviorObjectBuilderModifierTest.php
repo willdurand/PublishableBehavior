@@ -5,6 +5,16 @@
  */
 class PublishableBehaviorObjectBuilderModifierTest extends TestCase
 {
+    public function setUp()
+    {
+        $this->addPublishableObject('publishable_object', array());
+        $this->addPublishableObject('published_object', array(
+            'published_by_default' => 'true'
+        ));
+
+        $this->deleteAll();
+    }
+
     public function testIsPublishedShouldReturnFalseByDefault()
     {
         $obj = new PublishableObject();
@@ -130,5 +140,18 @@ class PublishableBehaviorObjectBuilderModifierTest extends TestCase
         $this->assertFalse($obj->isPublished());
         $this->assertFalse($obj->isNew());
         $this->assertEquals(0, PublishedObjectQuery::create()->count());
+    }
+
+    public function testDefaultPublicationOverride()
+    {
+        $obj = new PublishedObject();
+        $obj->setIsPublished(false);
+        $obj->save();
+        $this->assertEquals(false, $obj->getIsPublished());
+
+        $obj = new PublishableObject();
+        $obj->setIsPublished(true);
+        $obj->save();
+        $this->assertEquals(true, $obj->getIsPublished());
     }
 }
