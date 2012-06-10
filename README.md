@@ -111,11 +111,6 @@ $ phpunit -c phpunit.xml
 
 All green ?
 
-Todo
-----
-
-* Add time frames support (object published from `9999-99-99` to `9999-99-99`)
-
 
 Credits
 -------
