@@ -1,0 +1,173 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Publishablebehavior by willdurand</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Publishablebehavior</h1>
+        <p>The PublishableBehavior is designed to quickly add publish/unpublish features to your model.</p>
+        <p class="view"><a href="https://github.com/willdurand/PublishableBehavior">View the Project on GitHub <small>willdurand/PublishableBehavior</small></a></p>
+        <ul>
+          <li><a href="https://github.com/willdurand/PublishableBehavior/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/willdurand/PublishableBehavior/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/willdurand/PublishableBehavior">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>PublishableBehavior</h1>
+
+<p><a href="http://travis-ci.org/willdurand/PublishableBehavior"><img src="https://secure.travis-ci.org/willdurand/PublishableBehavior.png?branch=master" alt="Build Status"></a></p>
+
+<p>The PublishableBehavior is designed to quickly add publish/unpublish features to your model.</p>
+
+<h2>Installation</h2>
+
+<p>Install the behavior in your project, the recommended way is to use Composer:</p>
+
+<div class="highlight">
+<pre><span class="p-Indicator">{</span>
+    <span class="s">"require"</span><span class="p-Indicator">:</span> <span class="p-Indicator">{</span>
+        <span class="s">"willdurand/propel-publishable-behavior"</span><span class="p-Indicator">:</span> <span class="s">"dev-master"</span>
+    <span class="p-Indicator">}</span>
+<span class="p-Indicator">}</span>
+</pre>
+</div>
+
+
+<p>Add the following line to your <code>propel.ini</code> or <code>build.properties</code> configuration file:</p>
+
+<div class="highlight">
+<pre><span class="na">propel.behavior.publishable.class</span> <span class="o">=</span> <span class="s">vendor.willdurand.propel-publishable-behavior.src.PublishableBehavior</span>
+</pre>
+</div>
+
+
+<blockquote>
+<p>Note: <code>vendor.willdurand.propel-publishable-behavior.src</code> is the path of the behavior in dot-path notation.</p>
+</blockquote>
+
+<h2>Usage</h2>
+
+<h3>ActiveRecord API</h3>
+
+<p>Returns true if the object is published, false otherwise:</p>
+
+<pre><code>isPublished()
+</code></pre>
+
+<p>Mark an object as published:</p>
+
+<pre><code>publish(PropelPDO $con = null)
+</code></pre>
+
+<p>Mark an object as not published:</p>
+
+<pre><code>unpublish(PropelPDO $con = null)
+</code></pre>
+
+<p>Has publication frame started ?</p>
+
+<pre><code>hasPublicationEnded()
+</code></pre>
+
+<p>Has publication frame started ?</p>
+
+<pre><code>hasPublicationStarted()
+</code></pre>
+
+<h3>ActiveQuery API</h3>
+
+<p>Include unpublished objects in the results set:</p>
+
+<pre><code>includeUnpublished()
+</code></pre>
+
+<p>Filter by objects not published exclusively:</p>
+
+<pre><code>filterUnpublished()
+</code></pre>
+
+<p>Filter by objects published exclusively:</p>
+
+<pre><code>filterPublished()
+</code></pre>
+
+<p>Filter by publication active</p>
+
+<pre><code>filterByPublicationActive($date = 'now')
+</code></pre>
+
+<p>Mark an object as published:</p>
+
+<pre><code>publish(PropelPDO $con = null)
+</code></pre>
+
+<p>Mark an object as not published:</p>
+
+<pre><code>unpublish(PropelPDO $con = null)
+</code></pre>
+
+<h2>Parameters</h2>
+
+<div class="highlight">
+<pre><span class="nt">&lt;behavior</span> <span class="na">name=</span><span class="s">"publishable"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;parameter</span> <span class="na">name=</span><span class="s">"is_published_column"</span> <span class="na">value=</span><span class="s">"is_published"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;parameter</span> <span class="na">name=</span><span class="s">"published_by_default"</span> <span class="na">value=</span><span class="s">"false"</span> <span class="nt">/&gt;</span>
+    <span class="c">&lt;!-- timeframe support --&gt;</span>
+    <span class="nt">&lt;parameter</span> <span class="na">name=</span><span class="s">"with_timeframe"</span> <span class="na">value=</span><span class="s">"false"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;parameter</span> <span class="na">name=</span><span class="s">"published_at_column"</span> <span class="na">value=</span><span class="s">"published_at"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;parameter</span> <span class="na">name=</span><span class="s">"published_until_column"</span> <span class="na">value=</span><span class="s">"published_until"</span> <span class="nt">/&gt;</span>
+    <span class="c">&lt;!-- start and end value can be null --&gt;</span>
+    <span class="nt">&lt;parameter</span> <span class="na">name=</span><span class="s">"require_start"</span> <span class="na">value=</span><span class="s">"false"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;parameter</span> <span class="na">name=</span><span class="s">"require_end"</span> <span class="na">value=</span><span class="s">"false"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/behavior&gt;</span>
+</pre>
+</div>
+
+
+<h2>Running tests</h2>
+
+<p>First of all, copy the <code>phpunit.xml.dist</code> to <code>phpunit.xml</code>.</p>
+
+<p>If you did not install propel with composer, change <code>PROPEL_DIR</code> and <code>PHING_DIR</code>
+values to customize the include path.
+Customize autoloader by changing <code>AUTOLOAD</code> property.</p>
+
+<p>then simply launch</p>
+
+<div class="highlight">
+<pre><span class="nv">$ </span>phpunit -c phpunit.xml
+</pre>
+</div>
+
+
+<p>All green?</p>
+
+<h2>Credits</h2>
+
+<ul>
+<li>William Durand <a href="mailto:william.durand1@gmail.com">william.durand1@gmail.com</a>
+</li>
+<li>Julien Muetton </li>
+</ul>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/willdurand">willdurand</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
