@@ -11,7 +11,7 @@ Installation
 
 Install the behavior in your project, the recommended way is to use Composer:
 
-``` yaml
+``` json
 {
     "require": {
         "willdurand/propel-publishable-behavior": "dev-master"
