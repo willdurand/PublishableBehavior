@@ -59,6 +59,8 @@ class PublishableBehaviorQueryBuilderModifier
             return '';
         }
 
+        $builder->declareClass('PropelDateTime');
+        
         return $this->behavior->renderTemplate('queryFilterByPublicationActive', array(
             'queryClassName'            => $this->getQueryClassName($builder),
             'publishedAtColumnFilter'   => $this->getColumnFilter('published_at_column'),
