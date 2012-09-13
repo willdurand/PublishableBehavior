@@ -72,6 +72,8 @@ private \$forcePublish = false;
             return  '';
         }
 
+        $builder->declareClass('\PropelDateTime');
+        
         return $out = $this->behavior->renderTemplate('objectHasPublicationStarted', array(
             'modelName'                 => $this->getModelName($builder),
             'objectClassName'           => $this->getObjectClassName($builder),
@@ -86,6 +88,8 @@ private \$forcePublish = false;
             return  '';
         }
 
+        $builder->declareClass('\PropelDateTime');
+        
         return $this->behavior->renderTemplate('objectHasPublicationEnded', array(
             'modelName'                 => $this->getModelName($builder),
             'objectClassName'           => $this->getObjectClassName($builder),
