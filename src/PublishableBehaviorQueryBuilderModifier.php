@@ -59,7 +59,7 @@ class PublishableBehaviorQueryBuilderModifier
             return '';
         }
 
-        $builder->declareClass('\PropelDateTime');
+        $builder->declareClass('PropelDateTime');
         
         return $this->behavior->renderTemplate('queryFilterByPublicationActive', array(
             'queryClassName'            => $this->getQueryClassName($builder),
