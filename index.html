@@ -17,7 +17,10 @@
       <header>
         <h1>Publishablebehavior</h1>
         <p>The PublishableBehavior is designed to quickly add publish/unpublish features to your model.</p>
+
         <p class="view"><a href="https://github.com/willdurand/PublishableBehavior">View the Project on GitHub <small>willdurand/PublishableBehavior</small></a></p>
+
+
         <ul>
           <li><a href="https://github.com/willdurand/PublishableBehavior/zipball/master">Download <strong>ZIP File</strong></a></li>
           <li><a href="https://github.com/willdurand/PublishableBehavior/tarball/master">Download <strong>TAR Ball</strong></a></li>
@@ -35,23 +38,17 @@
 
 <p>Install the behavior in your project, the recommended way is to use Composer:</p>
 
-<div class="highlight">
-<pre><span class="p-Indicator">{</span>
-    <span class="s">"require"</span><span class="p-Indicator">:</span> <span class="p-Indicator">{</span>
-        <span class="s">"willdurand/propel-publishable-behavior"</span><span class="p-Indicator">:</span> <span class="s">"dev-master"</span>
-    <span class="p-Indicator">}</span>
-<span class="p-Indicator">}</span>
-</pre>
-</div>
-
+<div class="highlight"><pre><span class="p">{</span>
+    <span class="nt">"require"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">"willdurand/propel-publishable-behavior"</span><span class="p">:</span> <span class="s2">"dev-master"</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
 
 <p>Add the following line to your <code>propel.ini</code> or <code>build.properties</code> configuration file:</p>
 
-<div class="highlight">
-<pre><span class="na">propel.behavior.publishable.class</span> <span class="o">=</span> <span class="s">vendor.willdurand.propel-publishable-behavior.src.PublishableBehavior</span>
-</pre>
-</div>
-
+<div class="highlight"><pre><span class="na">propel.behavior.publishable.class</span> <span class="o">=</span> <span class="s">vendor.willdurand.propel-publishable-behavior.src.PublishableBehavior</span>
+</pre></div>
 
 <blockquote>
 <p>Note: <code>vendor.willdurand.propel-publishable-behavior.src</code> is the path of the behavior in dot-path notation.</p>
@@ -120,8 +117,7 @@
 
 <h2>Parameters</h2>
 
-<div class="highlight">
-<pre><span class="nt">&lt;behavior</span> <span class="na">name=</span><span class="s">"publishable"</span><span class="nt">&gt;</span>
+<div class="highlight"><pre><span class="nt">&lt;behavior</span> <span class="na">name=</span><span class="s">"publishable"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;parameter</span> <span class="na">name=</span><span class="s">"is_published_column"</span> <span class="na">value=</span><span class="s">"is_published"</span> <span class="nt">/&gt;</span>
     <span class="nt">&lt;parameter</span> <span class="na">name=</span><span class="s">"published_by_default"</span> <span class="na">value=</span><span class="s">"false"</span> <span class="nt">/&gt;</span>
     <span class="c">&lt;!-- timeframe support --&gt;</span>
@@ -132,9 +128,7 @@
     <span class="nt">&lt;parameter</span> <span class="na">name=</span><span class="s">"require_start"</span> <span class="na">value=</span><span class="s">"false"</span> <span class="nt">/&gt;</span>
     <span class="nt">&lt;parameter</span> <span class="na">name=</span><span class="s">"require_end"</span> <span class="na">value=</span><span class="s">"false"</span> <span class="nt">/&gt;</span>
 <span class="nt">&lt;/behavior&gt;</span>
-</pre>
-</div>
-
+</pre></div>
 
 <h2>Running tests</h2>
 
@@ -146,11 +140,8 @@ Customize autoloader by changing <code>AUTOLOAD</code> property.</p>
 
 <p>then simply launch</p>
 
-<div class="highlight">
-<pre><span class="nv">$ </span>phpunit -c phpunit.xml
-</pre>
-</div>
-
+<div class="highlight"><pre><span class="nv">$ </span>phpunit -c phpunit.xml
+</pre></div>
 
 <p>All green?</p>
 
