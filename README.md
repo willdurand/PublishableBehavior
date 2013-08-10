@@ -86,6 +86,7 @@ Parameters
 <behavior name="publishable">
     <parameter name="is_published_column" value="is_published" />
     <parameter name="published_by_default" value="false" />
+    <parameter name="include_unpublished" value="false" />
     <!-- timeframe support -->
     <parameter name="with_timeframe" value="false" />
     <parameter name="published_at_column" value="published_at" />
@@ -95,6 +96,9 @@ Parameters
     <parameter name="require_end" value="false" />
 </behavior>
 ```
+
+> Note: Parameter `include_unpublished` allows you to exclude unpublished object from each query. It is setup to `false` by default. If you don't want to exclude unpublished items, you have to set it to `true` 
+
 
 Running tests
 -------------
@@ -108,7 +112,7 @@ Customize autoloader by changing `AUTOLOAD` property.
 then simply launch
 
 ``` bash
-$ phpunit -c phpunit.xml
+$ vendor/bin/phpunit -c phpunit.xml
 ```
 
 All green?

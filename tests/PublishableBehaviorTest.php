@@ -57,8 +57,8 @@ class PublishableBehaviorTest extends TestCase
             'require_end'     => 'true',
         );
         $expected = <<<EOF
-    published_at TIMESTAMP NOT NULL,
-    published_until TIMESTAMP NOT NULL
+    [published_at] TIMESTAMP NOT NULL,
+    [published_until] TIMESTAMP NOT NULL
 EOF;
         $this->assertSQLContains('publishable_object', $options, $expected);
     }
@@ -69,8 +69,8 @@ EOF;
             'with_timeframe' => 'true',
         );
         $expected = <<<EOF
-    published_at TIMESTAMP,
-    published_until TIMESTAMP
+    [published_at] TIMESTAMP,
+    [published_until] TIMESTAMP
 EOF;
         $this->assertSQLContains('publishable_object', $options, $expected);
     }
