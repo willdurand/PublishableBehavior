@@ -14,7 +14,9 @@ class PublishableBehaviorQueryBuilderModifier
 
     public function preSelectQuery($builder)
     {
-        return $this->behavior->renderTemplate('queryPreSelect');
+        if ($this->behavior->getParameter('include_unpublished') == 'false') {
+            return $this->behavior->renderTemplate('queryPreSelect');
+        }
     }
 
     public function queryAttributes($builder)
