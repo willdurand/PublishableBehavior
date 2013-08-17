@@ -11,6 +11,7 @@ class PublishableBehavior extends Behavior
     protected $parameters = array(
         'is_published_column'     => 'is_published',
         'published_by_default'    => 'false',
+        'include_unpublished'     => 'false',
         // timeframe configuration
         'with_timeframe'          => 'false',
         'published_at_column'     => 'published_at',
